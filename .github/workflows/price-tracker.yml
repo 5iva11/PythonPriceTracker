@@ -3,7 +3,7 @@ name: Amazon Price Tracker
 on:
   schedule:
     # Runs every 2 hours (adjust as needed)
-    - cron: "*/2 * * * *"
+    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 jobs:
