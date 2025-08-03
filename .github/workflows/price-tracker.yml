@@ -26,14 +26,22 @@ jobs:
           playwright install chromium
 
       - name: Set up environment variables
+        env:
+          PRODUCT_URL: ${{ secrets.PRODUCT_URL }}
+          THRESHOLD_PRICE: ${{ secrets.THRESHOLD_PRICE }}
+          USER_EMAIL: ${{ secrets.USER_EMAIL }}
+          APP_PASSWORD: ${{ secrets.APP_PASSWORD }}
+          TO_EMAIL: ${{ secrets.TO_EMAIL }}
+          LOG_FILE: price_log.txt
+          CSV_FILE: price_log.csv
         run: |
-          echo "PRODUCT_URL=${{ secrets.PRODUCT_URL }}" >> .env
-          echo "THRESHOLD_PRICE=${{ secrets.THRESHOLD_PRICE }}" >> .env
-          echo "USER_EMAIL=${{ secrets.USER_EMAIL }}" >> .env
-          echo "APP_PASSWORD=${{ secrets.APP_PASSWORD }}" >> .env
-          echo "TO_EMAIL=${{ secrets.TO_EMAIL }}" >> .env
-          echo "LOG_FILE=price_log.txt" >> .env
-          echo "CSV_FILE=price_log.csv" >> .env
+          echo "Environment variables set."
 
       - name: Run price tracker
         run: python webscrapper.py --once
+
+      - name: Upload price log CSV
+        uses: actions/upload-artifact@v4
+        with:
+          name: pricelog
+          path: price_log.csv
