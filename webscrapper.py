@@ -26,7 +26,13 @@ USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 def get_amazon_price(url):
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
-        context = browser.new_context(user_agent=USER_AGENT)
+        context = browser.new_context(
+        user_agent=USER_AGENT,
+        locale="en-IN",                 # English (India)
+        timezone_id="Asia/Kolkata",     # Indian time zone
+        geolocation={"longitude": 77.2090, "latitude": 28.6139},  # New Delhi
+        permissions=["geolocation"]
+    )
         page = context.new_page()
 
         print(f"Navigating to {url}")
