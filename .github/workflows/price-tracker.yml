@@ -32,10 +32,20 @@ jobs:
           USER_EMAIL: ${{ secrets.USER_EMAIL }}
           APP_PASSWORD: ${{ secrets.APP_PASSWORD }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
-          LOG_FILE: price_log.txt
-          CSV_FILE: price_log.csv
+          LOG_FILE: ${{ secrets.LOG_FILE }}
+          CSV_FILE: ${{ secrets.CSV_FILE }}
         run: |
           echo "Environment variables set."
+
+      - name: Debug environment variables
+        run: |
+          echo "PRODUCT_URL is set: [${PRODUCT_URL:+yes}]"
+          echo "THRESHOLD_PRICE is set: [${THRESHOLD_PRICE:+yes}]"
+          echo "USER_EMAIL is set: [${USER_EMAIL:+yes}]"
+          echo "APP_PASSWORD is set: [${APP_PASSWORD:+yes}]"
+          echo "TO_EMAIL is set: [${TO_EMAIL:+yes}]"
+          echo "LOG_FILE: $LOG_FILE"
+          echo "CSV_FILE: $CSV_FILE"
 
       - name: Run price tracker
         run: python webscrapper.py --once
