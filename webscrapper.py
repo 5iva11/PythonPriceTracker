@@ -31,6 +31,7 @@ def get_amazon_price(url):
 
         print(f"Navigating to {url}")
         page.goto(url, timeout=60000)
+        page.screenshot(path="debug.png")
 
         # Wait for price element to load (common Amazon price selectors)
         price = None
