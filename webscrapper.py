@@ -43,9 +43,9 @@ def get_amazon_price(url):
         price = None
         #page.pause()  # Pause to allow manual inspection if needed
         try:
-            if page.locator("text=Continue shopping").is_visible(timeout=5000):
+            if page.locator("//button[text()='Continue shopping']").is_visible(timeout=5000):
                 print("Continue button is visible, clicking it...")
-                page.locator("text=Continue shopping").click()
+                page.locator("//button[text()='Continue shopping']").click()
             price = page.locator("//div[@id='corePriceDisplay_desktop_feature_div']//span[@class='a-price-whole']").inner_text()
             productTitle = page.locator("//span[@id='productTitle']").inner_text()
             print(f"Product Title: {productTitle.strip()}")
