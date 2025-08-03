@@ -27,7 +27,7 @@ jobs:
 
       - name: Set up environment variables
         run: |
-          echo "PRODUCT_URL=${{ secrets.PRODUCT_URL }}" >> .env
+          echo "PRODUCT_URL=https://www.amazon.in/dp/B0F5WTG8RG" >> .env
           echo "THRESHOLD_PRICE=${{ secrets.THRESHOLD_PRICE }}" >> .env
           echo "USER_EMAIL=${{ secrets.USER_EMAIL }}" >> .env
           echo "APP_PASSWORD=${{ secrets.APP_PASSWORD }}" >> .env
