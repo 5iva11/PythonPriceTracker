@@ -11,6 +11,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set up environment variables
+        env:
+          PRODUCT_URL: ${{ secrets.PRODUCT_URL }}
+          THRESHOLD_PRICE: ${{ secrets.THRESHOLD_PRICE }}
+          USER_EMAIL: ${{ secrets.USER_EMAIL }}
+          APP_PASSWORD: ${{ secrets.APP_PASSWORD }}
+          TO_EMAIL: ${{ secrets.TO_EMAIL }}
+          LOG_FILE: ${{ secrets.LOG_FILE }}
+          CSV_FILE: ${{ secrets.CSV_FILE }}
+        run: |
+          echo "Environment variables set."
+
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -24,18 +36,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           playwright install chromium
-
-      - name: Set up environment variables
-        env:
-          PRODUCT_URL: ${{ secrets.PRODUCT_URL }}
-          THRESHOLD_PRICE: ${{ secrets.THRESHOLD_PRICE }}
-          USER_EMAIL: ${{ secrets.USER_EMAIL }}
-          APP_PASSWORD: ${{ secrets.APP_PASSWORD }}
-          TO_EMAIL: ${{ secrets.TO_EMAIL }}
-          LOG_FILE: ${{ secrets.LOG_FILE }}
-          CSV_FILE: ${{ secrets.CSV_FILE }}
-        run: |
-          echo "Environment variables set."
 
       - name: Debug environment variables
         run: |
