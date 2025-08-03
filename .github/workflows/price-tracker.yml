@@ -38,6 +38,12 @@ jobs:
       - name: Run price tracker
         run: python webscrapper.py --once
 
+      - name: Upload debug image
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-image
+          path: debug.png
+
       - name: Upload price log CSV
         uses: actions/upload-artifact@v4
         with:
