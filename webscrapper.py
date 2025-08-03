@@ -37,7 +37,7 @@ def get_amazon_price(url):
 
         print(f"Navigating to {url}")
         page.goto(url, timeout=60000)
-        page.screenshot(path="debug.png")
+        
 
         # Wait for price element to load (common Amazon price selectors)
         price = None
@@ -49,6 +49,7 @@ def get_amazon_price(url):
             price = page.locator("//div[@id='corePriceDisplay_desktop_feature_div']//span[@class='a-price-whole']").inner_text()
             productTitle = page.locator("//span[@id='productTitle']").inner_text()
             print(f"Product Title: {productTitle.strip()}")
+            page.screenshot(path="debug.png")
         except Exception as e:
             print(f"Error extracting price: {e}")
 
